@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Dashboard from './Dashboard';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ const routing = (
         <div>
             <Switch>
                 <Route exact path="/" component={App} />
+                <Route exact path="/home" component={Dashboard} />
                 <Route component={() => (<div>404 Not found.</div>)} />
             </Switch>
         </div>

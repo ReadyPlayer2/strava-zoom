@@ -10,7 +10,7 @@ class App extends Component {
     // client_id for my Strava application as listed at https://www.strava.com/settings/api when logged in
     window.location.replace('https://www.strava.com/oauth/authorize?client_id=41064&response_type=code&redirect_uri=http://localhost:5000/authenticate&approval_prompt=force&scope=activity:read');
   }
-  
+
   render() {
     return (
       <div className="App">
