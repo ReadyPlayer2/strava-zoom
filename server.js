@@ -28,7 +28,14 @@ app.get('/authenticate', async function (req, res) {
     console.log('expires_in: ' + data['expires_in']);
     console.log('username: ' + data['athlete']['username']);
     console.log('id: ' + data['athlete']['id']);
-    res.send(data);
+    // res.send(data);
+    res.set('location', 'http://localhost:3000/home');
+    res.status(301).cookie('access_token', 'Bearer ' + data['access_token'], {
+        expires: new Date(Date.now() + data['expires_in'] * 100) // cookie deleted when expired
+    }).send();
+    // res.status(201).cookie('access_token', 'Bearer ' + data['access_token'], {
+    //     expires: new Date(Date.now() + data['expires_in']) // cookie deleted when expired
+    // }).redirect(301, '/');
 });
 
 app.listen(PORT, () => console.log(`Express JS listening on port ${PORT}`));

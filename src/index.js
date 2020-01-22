@@ -10,6 +10,7 @@ const routing = (
         <div>
             <Switch>
                 <Route exact path="/" component={App} />
+                <Route exact path="/home" component={() => (<div>Authenticated.</div>)} />
                 <Route component={() => (<div>404 Not found.</div>)} />
             </Switch>
         </div>
