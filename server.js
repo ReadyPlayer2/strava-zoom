@@ -13,6 +13,21 @@ app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 
+app.get('/activities', async function(req, res) {
+    const settings = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': req.headers.authorization
+        }
+    };
+
+    var response = await fetch('https://www.strava.com/api/v3/athlete/activities', settings);
+    var data = await response.json();
+    console.log(data)
+    res.send(data);
+});
+
 app.get('/authenticate', async function (req, res) {
     const settings = {
         method: 'POST',
@@ -29,8 +44,8 @@ app.get('/authenticate', async function (req, res) {
     console.log('username: ' + data['athlete']['username']);
     console.log('id: ' + data['athlete']['id']);
 
-    res.set('location', 'http://localhost:3000/home');
     // redirect to app page (store data in cookies)
+    res.set('location', 'http://localhost:3000/home');
     res.status(301).
     cookie('str-zoom-access_token', 'Bearer ' + data['access_token'], {
         expires: new Date(Date.now() + data['expires_in'] * 100) // cookie deleted when expired
