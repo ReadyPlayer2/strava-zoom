@@ -33,9 +33,6 @@ app.get('/authenticate', async function (req, res) {
     res.status(301).cookie('access_token', 'Bearer ' + data['access_token'], {
         expires: new Date(Date.now() + data['expires_in'] * 100) // cookie deleted when expired
     }).send();
-    // res.status(201).cookie('access_token', 'Bearer ' + data['access_token'], {
-    //     expires: new Date(Date.now() + data['expires_in']) // cookie deleted when expired
-    // }).redirect(301, '/');
 });
 
 app.listen(PORT, () => console.log(`Express JS listening on port ${PORT}`));
