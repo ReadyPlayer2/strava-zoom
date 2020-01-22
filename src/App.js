@@ -3,12 +3,12 @@ import connect from './icons/btn_connect_strava.png';
 import './App.css';
 
 class App extends Component {
-  
+
   connectWithStrava = async () => {
     console.log("Connecting to Strava...");
 
     // client_id for my Strava application as listed at https://www.strava.com/settings/api when logged in
-    window.location.replace('https://www.strava.com/oauth/authorize?client_id=41064&response_type=code&redirect_uri=http://localhost:3000&approval_prompt=force&scope=activity:read');
+    window.location.replace('https://www.strava.com/oauth/authorize?client_id=41064&response_type=code&redirect_uri=http://localhost:5000/authenticate&approval_prompt=force&scope=activity:read');
   }
   
   render() {
