@@ -2,15 +2,34 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activities: []
+        }
+    }
+
+    componentDidMount() {
+        this.getActivities().then(res => {
+            this.setState({
+                activities: res
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     getActivities = async () => {
-        var token = Cookies.get('str-zoom-access_token');
+        var access_token = Cookies.get('str-zoom-access_token');
+        var refresh_token = Cookies.get('str-zoom-refresh_token')
 
         const settings = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': access_token,
+                'refresh-token': refresh_token
             }
         };
 
@@ -20,13 +39,23 @@ class Dashboard extends Component {
         return data;
     }
 
+    displayActivity(activity) {
+        return (
+            <p>{activity['name']}</p>
+        )
+    }
+
     render() {
-        this.getActivities();
+        // this.getActivities();
         return (
             <div>
                 <header>
                     <p>-- strava-zoom --</p>
-
+                    <div>
+                        {this.state.activities.map(activity => (
+                            this.displayActivity(activity)
+                        ))}
+                    </div>
                     <p>Powered by Strava.</p>
                 </header>
             </div>
