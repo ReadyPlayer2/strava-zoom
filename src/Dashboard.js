@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { DataTable } from 'carbon-components-react';
+const {
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableBody,
+    TableCell,
+    TableHeader,
+  } = DataTable;
 
 class Dashboard extends Component {
     constructor(props) {
@@ -58,7 +67,7 @@ class Dashboard extends Component {
                             key: "distance"
                         },
                         {
-                            header: "Time",
+                            header: "Time (s)",
                             key: "elapsed_time"
                         },
                         {
@@ -74,6 +83,30 @@ class Dashboard extends Component {
                         // return tempActivity;
                         return { ...activity, id: activity.id.toString() };
                     })}
+                    render={({ rows, headers, getHeaderProps }) => (
+                        <TableContainer>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                    {headers.map(header => (
+                                        <TableHeader {...getHeaderProps({ header })}>
+                                        {header.header}
+                                        </TableHeader>
+                                    ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows.map(row => (
+                                    <TableRow key={row.id}>
+                                        {row.cells.map(cell => (
+                                        <TableCell key={cell.id}>{cell.value}</TableCell>
+                                        ))}
+                                    </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        )}
                 />
                 )}
                 <footer>
