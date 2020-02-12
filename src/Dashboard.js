@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
+import { DataTable } from 'carbon-components-react';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -39,25 +40,45 @@ class Dashboard extends Component {
         return data;
     }
 
-    displayActivity(activity) {
-        return (
-            <p>{activity['name']}</p>
-        )
-    }
-
     render() {
-        // this.getActivities();
         return (
             <div>
                 <header>
                     <p>-- strava-zoom --</p>
-                    <div>
-                        {this.state.activities.map(activity => (
-                            this.displayActivity(activity)
-                        ))}
-                    </div>
-                    <p>Powered by Strava.</p>
                 </header>
+                {(
+                <DataTable
+                    headers={[
+                        {
+                            header: "Activity",
+                            key: "name"
+                        },
+                        {
+                            header: "Distance (m)",
+                            key: "distance"
+                        },
+                        {
+                            header: "Time",
+                            key: "elapsed_time"
+                        },
+                        {
+                            header: "Type",
+                            key: "type"
+                        }
+                    ]}
+                    locale="en"
+                    rows={this.state.activities.map((activity) => {
+                        // table rows must have a String id, but strava gives us a number so toString it
+                        // let tempActivity = activity;
+                        // tempActivity['id'] = tempActivity['id'].toString();
+                        // return tempActivity;
+                        return { ...activity, id: activity.id.toString() };
+                    })}
+                />
+                )}
+                <footer>
+                    <p>Powered by Strava.</p>
+                </footer>
             </div>
         )
     }
