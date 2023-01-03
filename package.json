@@ -12,7 +12,7 @@
     "carbon-components-react": "^7.9.3",
     "carbon-icons": "^7.0.7",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "js-cookie": "^2.2.1",
     "node-fetch": "^3.1.1",
     "react": "^16.12.0",
